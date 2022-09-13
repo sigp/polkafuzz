@@ -2,7 +2,7 @@
 
 
 Differential Fuzzing Framework for Polkafuzz.
-Maintained by Sigma Prime for the Filecoin Foundation.
+Maintained by Sigma Prime for the Web3 Foundation.
 
 ## Overview
 
@@ -13,6 +13,6 @@ _**A note on terminology:** "client" and "implementation" are used interchangeab
 
 ## Implementations
 
-* [Substrate](https://github.com/paritytech/substrate)(Parity, Rust)
+* [Substrate](https://github.com/paritytech/substrate) (Parity, Rust)
 * [Smoldot](https://github.com/paritytech/smoldot) (Parity, Rust)
 * [Gossamer](https://github.com/ChainSafe/gossamer) (ChainSafe, Golang)
