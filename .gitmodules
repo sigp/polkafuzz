@@ -1,0 +1,9 @@
+[submodule "clients/substrate"]
+	path = clients/substrate
+	url = https://github.com/paritytech/substrate
+[submodule "clients/smoldot"]
+	path = clients/smoldot
+	url = https://github.com/paritytech/smoldot
+[submodule "clients/gossamer"]
+	path = clients/gossamer
+	url = https://github.com/ChainSafe/gossamer
