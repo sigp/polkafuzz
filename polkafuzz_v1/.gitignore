@@ -1,0 +1,4 @@
+target/
+polkafuzz_v1
+Cargo.lock
+libpolkafuzz_v1.rlib
