@@ -6,3 +6,12 @@ pub fn smoldot_chain_spec_from_json_bytes(data: &[u8]) -> bool {
         true
     }
 }
+
+pub fn smoldot_multiaddr_try_from(data: &[u8]) -> bool {
+    let ret = smoldot::libp2p::multiaddr::Multiaddr::try_from(data.to_vec());
+    if let Err(_) = ret {
+        false
+    } else {
+        true
+    }
+}

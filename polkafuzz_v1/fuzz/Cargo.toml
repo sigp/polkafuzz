@@ -35,3 +35,15 @@ name = "chain_spec_libafl"
 path = "fuzz_targets/chain_spec_libafl.rs"
 test = false
 doc = false
+
+[[bin]]
+name = "multiaddr_libfuzzer"
+path = "fuzz_targets/multiaddr_libfuzzer.rs"
+test = false
+doc = false
+
+[[bin]]
+name = "multiaddr_libafl"
+path = "fuzz_targets/multiaddr_libafl.rs"
+test = false
+doc = false
