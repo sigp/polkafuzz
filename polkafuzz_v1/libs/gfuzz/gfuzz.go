@@ -27,6 +27,20 @@ func gfuzz_genesis_json_from_bytes(data_ptr unsafe.Pointer, data_size int) bool 
 	return true
 }
 
+//export gfuzz_new_multiaddr_bytes
+func gfuzz_new_multiaddr_bytes(data_ptr unsafe.Pointer, data_size int) bool {
+	var data []byte
+	sh := (*reflect.SliceHeader)(unsafe.Pointer(&data))
+	sh.Data = uintptr(data_ptr)
+	sh.Len = data_size
+	sh.Cap = data_size
+	_, err := ma.NewMultiaddrBytes(data)
+	if err != nil {
+		return false
+	}
+	return true
+}
+
 //export gfuzz_new_multiaddr
 func gfuzz_new_multiaddr(data_ptr unsafe.Pointer, data_size int) bool {
 	var data []byte
@@ -34,7 +48,7 @@ func gfuzz_new_multiaddr(data_ptr unsafe.Pointer, data_size int) bool {
 	sh.Data = uintptr(data_ptr)
 	sh.Len = data_size
 	sh.Cap = data_size
-	_, err := ma.NewMultiaddrBytes(data)
+	_, err := ma.NewMultiaddr(string(data[:]))
 	if err != nil {
 		return false
 	}

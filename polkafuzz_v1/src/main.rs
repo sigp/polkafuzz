@@ -60,7 +60,8 @@ arg_enum! {
     #[derive(Copy, Clone, StructOpt, Debug)]
     enum Targets {
         ChainSpec,
-        Multiaddr,
+        MultiaddrFromStr,
+        MultiaddrTryFrom,
     }
 }
 
@@ -138,10 +139,15 @@ fn test(target: Targets) -> Result<(), Error> {
             substrate::substrate_chain_spec_from_json_bytes(&test_input);
             gossamer::gossamer_genesis_json_from_bytes(&test_input);
         }
-        Targets::Multiaddr => {
+        Targets::MultiaddrFromStr => {
+            smoldot::smoldot_multiaddr_from_str(&test_input);
+            substrate::substrate_multiaddr_from_str(&test_input);
+            gossamer::gossamer_new_multiaddr(&test_input);
+        }
+        Targets::MultiaddrTryFrom => {
             smoldot::smoldot_multiaddr_try_from(&test_input);
             substrate::substrate_multiaddr_try_from(&test_input);
-            gossamer::gossamer_new_multiaddr(&test_input);
+            gossamer::gossamer_new_multiaddr_bytes(&test_input);
         }
     }
     Ok(())
@@ -150,7 +156,8 @@ fn test(target: Targets) -> Result<(), Error> {
 fn fuzz_target(engine: Engines, target: Targets) -> Result<(), Error> {
     let target_name = match target {
         Targets::ChainSpec => "chain_spec",
-        Targets::Multiaddr => "multiaddr"
+        Targets::MultiaddrFromStr => "multiaddr_from_str",
+        Targets::MultiaddrTryFrom => "multiaddr_try_from",
     };
     match engine {
         Engines::LibFuzzer => {

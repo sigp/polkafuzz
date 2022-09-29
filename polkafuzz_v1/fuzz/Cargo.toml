@@ -37,13 +37,25 @@ test = false
 doc = false
 
 [[bin]]
-name = "multiaddr_libfuzzer"
-path = "fuzz_targets/multiaddr_libfuzzer.rs"
+name = "multiaddr_try_from_libfuzzer"
+path = "fuzz_targets/multiaddr_try_from_libfuzzer.rs"
 test = false
 doc = false
 
 [[bin]]
-name = "multiaddr_libafl"
-path = "fuzz_targets/multiaddr_libafl.rs"
+name = "multiaddr_try_from_libafl"
+path = "fuzz_targets/multiaddr_try_from_libafl.rs"
+test = false
+doc = false
+
+[[bin]]
+name = "multiaddr_from_str_libfuzzer"
+path = "fuzz_targets/multiaddr_from_str_libfuzzer.rs"
+test = false
+doc = false
+
+[[bin]]
+name = "multiaddr_from_str_libafl"
+path = "fuzz_targets/multiaddr_from_str_libafl.rs"
 test = false
 doc = false
