@@ -59,3 +59,15 @@ name = "multiaddr_from_str_libafl"
 path = "fuzz_targets/multiaddr_from_str_libafl.rs"
 test = false
 doc = false
+
+[[bin]]
+name = "decode_babepredigest_libfuzzer"
+path = "fuzz_targets/decode_babepredigest_libfuzzer.rs"
+test = false
+doc = false
+
+[[bin]]
+name = "decode_babepredigest_libafl"
+path = "fuzz_targets/decode_babepredigest_libafl.rs"
+test = false
+doc = false

@@ -77,6 +77,7 @@ extern "C" {
 extern GoUint8 gfuzz_genesis_json_from_bytes(void* data_ptr, GoInt data_size);
 extern GoUint8 gfuzz_new_multiaddr_bytes(void* data_ptr, GoInt data_size);
 extern GoUint8 gfuzz_new_multiaddr(void* data_ptr, GoInt data_size);
+extern GoUint8 gfuzz_decode_babepredigest(void* data_ptr, GoInt data_size);
 
 #ifdef __cplusplus
 }

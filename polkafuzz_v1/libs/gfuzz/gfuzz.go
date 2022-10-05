@@ -8,6 +8,7 @@ import (
 
 	"github.com/ChainSafe/gossamer/lib/genesis"
 	ma "github.com/multiformats/go-multiaddr"
+	"github.com/ChainSafe/gossamer/dot/types"
 )
 
 func main() {}
@@ -49,6 +50,20 @@ func gfuzz_new_multiaddr(data_ptr unsafe.Pointer, data_size int) bool {
 	sh.Len = data_size
 	sh.Cap = data_size
 	_, err := ma.NewMultiaddr(string(data[:]))
+	if err != nil {
+		return false
+	}
+	return true
+}
+
+//export gfuzz_decode_babepredigest
+func gfuzz_decode_babepredigest(data_ptr unsafe.Pointer, data_size int) bool {
+	var data []byte
+	sh := (*reflect.SliceHeader)(unsafe.Pointer(&data))
+	sh.Data = uintptr(data_ptr)
+	sh.Len = data_size
+	sh.Cap = data_size
+	_, err := types.DecodeBabePreDigest(data)
 	if err != nil {
 		return false
 	}

@@ -11,3 +11,7 @@ pub fn substrate_multiaddr_from_str(data: &[u8]) -> bool {
 pub fn substrate_multiaddr_try_from(data: &[u8]) -> bool {
     self::substrate::substrate_multiaddr_try_from(data)
 }
+
+pub fn substrate_decode_babepredigest(data: &[u8]) -> bool {
+    self::substrate::substrate_decode_babepredigest(data)
+}

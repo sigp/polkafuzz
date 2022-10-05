@@ -62,6 +62,7 @@ arg_enum! {
         ChainSpec,
         MultiaddrFromStr,
         MultiaddrTryFrom,
+        DecodeBabePreDigest,
     }
 }
 
@@ -149,6 +150,11 @@ fn test(target: Targets) -> Result<(), Error> {
             substrate::substrate_multiaddr_try_from(&test_input);
             gossamer::gossamer_new_multiaddr_bytes(&test_input);
         }
+        Targets::DecodeBabePreDigest => {
+            smoldot::smoldot_decode_babepredigest(&test_input);
+            substrate::substrate_decode_babepredigest(&test_input);
+            gossamer::gossamer_decode_babepredigest(&test_input);
+        }
     }
     Ok(())
 }
@@ -158,6 +164,7 @@ fn fuzz_target(engine: Engines, target: Targets) -> Result<(), Error> {
         Targets::ChainSpec => "chain_spec",
         Targets::MultiaddrFromStr => "multiaddr_from_str",
         Targets::MultiaddrTryFrom => "multiaddr_try_from",
+        Targets::DecodeBabePreDigest => "decode_babepredigest",
     };
     match engine {
         Engines::LibFuzzer => {

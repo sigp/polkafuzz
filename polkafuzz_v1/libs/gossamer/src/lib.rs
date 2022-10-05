@@ -11,3 +11,7 @@ pub fn gossamer_new_multiaddr_bytes(data: &[u8]) -> bool {
 pub fn gossamer_new_multiaddr(data: &[u8]) -> bool {
     self::gossamer::gossamer_new_multiaddr(data)
 }
+
+pub fn gossamer_decode_babepredigest(data: &[u8]) -> bool {
+    self::gossamer::gossamer_decode_babepredigest(data)
+}
