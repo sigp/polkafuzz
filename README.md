@@ -20,7 +20,7 @@ _**A note on terminology:** "client" and "implementation" are used interchangeab
 
 ## Architecture overview
 
-The following diagram describes the current architecture of beacon-fuzz:
+The following diagram describes the current architecture of polkafuzz:
 
 <img src="./architecture.jpg">
 
@@ -30,13 +30,13 @@ The purpose of this tool is to identify crashes (i.e. panics) in Polkadot implem
 
 # ```polkafuzz_v1``` -  Differential Fuzzing with FFI Bindings
 
-A differential fuzzer of Polkadot implementations using libfuzzer and libafl. It is developed in Rust (for ease of maintainability) and leverages Foreign Function Interfaces (FFI) bindings.
+A differential fuzzer of Polkadot implementations using `libfuzzer` and `libafl`. It is developed in Rust (for ease of maintainability) and leverages Foreign Function Interfaces (FFI) bindings.
 
-By leveraging the latest update to the libfuzzer-sys and cargo_fuzz crates, this tool is able to write fuzz targets that take well-formed instances of custom types by deriving and implementing the Arbitrary trait, which allows us to create structured inputs from raw byte buffers.
+By leveraging the latest updates to the `libfuzzer-sys` and `cargo_fuzz` crates, this tool is able to write fuzz targets that take well-formed instances of custom types by deriving and implementing the `Arbitrary` trait, which allows us to create structured inputs from raw byte buffers.
 
 # ```reproducer``` Replaying Samples Across Implementations
 
-This tool is reporducing to crashes or some inputs for helping report writing.
+This tool can be used to reproduce crashes to help with debugging and triaging.
 
 ## Usage
 
