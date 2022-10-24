@@ -46,3 +46,12 @@ pub fn substrate_decode_babepredigest(mut data: &[u8]) -> bool {
         true
     }
 }
+
+pub fn substrate_publickey_from_protobuf_encoding(data: &[u8]) -> bool {
+    let ret = libp2p::identity::PublicKey::from_protobuf_encoding(data);
+    if let Err(_) = ret {
+        false
+    } else {
+        true
+    }
+}

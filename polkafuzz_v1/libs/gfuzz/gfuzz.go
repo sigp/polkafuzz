@@ -6,9 +6,10 @@ import (
 	"unsafe"
 	"encoding/json"
 
-	"github.com/ChainSafe/gossamer/lib/genesis"
+    "github.com/ChainSafe/gossamer/lib/genesis"
 	ma "github.com/multiformats/go-multiaddr"
 	"github.com/ChainSafe/gossamer/dot/types"
+    "github.com/libp2p/go-libp2p-core/crypto"
 )
 
 func main() {}
@@ -69,3 +70,18 @@ func gfuzz_decode_babepredigest(data_ptr unsafe.Pointer, data_size int) bool {
 	}
 	return true
 }
+
+//export gfuzz_publickey_from_proto
+func gfuzz_publickey_from_proto(data_ptr unsafe.Pointer, data_size int) bool {
+    var data []byte
+    sh := (*reflect.SliceHeader) (unsafe.Pointer(&data))
+    sh.Data = uintptr(data_ptr)
+    sh.Len = data_size
+    sh.Cap = data_size
+    _, err := crypto.UnmarshalPublicKey(data)
+    if err != nil {
+        return false
+    }
+    return true
+}
+

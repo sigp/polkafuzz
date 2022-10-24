@@ -39,21 +39,6 @@ enum Cli {
         )]
         target: Targets,
     },
-    /// Reproduce crash with crash file or hardcoded inputs
-    #[structopt(name = "reproduce")]
-    Reproduce {
-        #[structopt(
-            possible_values = &self::Clients::variants(),
-            case_insensitive = true
-        )]
-        client: Clients,
-        #[structopt(
-            possible_values = &self::Targets::variants(),
-            case_insensitive = true
-        )]
-        target: Targets,
-        crash_file: String,
-    },
 }
 
 arg_enum! {
@@ -63,6 +48,7 @@ arg_enum! {
         MultiaddrFromStr,
         MultiaddrTryFrom,
         DecodeBabePreDigest,
+        PublicKeyFromProtobufEncoding,
     }
 }
 
@@ -99,14 +85,6 @@ fn run() -> Result<(), Error> {
         // Test a target with empty input or hardcoded input
         Tests { target } => {
             test(target)?;
-        }
-        // Reproduce crash with crash file or hardcoded inputs
-        Reproduce {
-            client,
-            target,
-            crash_file,
-        } => {
-            reproduce_crash(client, target, crash_file)?;
         }
     }
     Ok(())
@@ -155,6 +133,11 @@ fn test(target: Targets) -> Result<(), Error> {
             substrate::substrate_decode_babepredigest(&test_input);
             gossamer::gossamer_decode_babepredigest(&test_input);
         }
+        Targets::PublicKeyFromProtobufEncoding => {
+            smoldot::smoldot_publickey_from_protobuf_encoding(&test_input);
+            substrate::substrate_publickey_from_protobuf_encoding(&test_input);
+            gossamer::gossamer_publickey_from_proto(&test_input);
+        }
     }
     Ok(())
 }
@@ -165,6 +148,7 @@ fn fuzz_target(engine: Engines, target: Targets) -> Result<(), Error> {
         Targets::MultiaddrFromStr => "multiaddr_from_str",
         Targets::MultiaddrTryFrom => "multiaddr_try_from",
         Targets::DecodeBabePreDigest => "decode_babepredigest",
+        Targets::PublicKeyFromProtobufEncoding => "publickey_from_protobuf_encoding",
     };
     match engine {
         Engines::LibFuzzer => {
@@ -202,6 +186,3 @@ fn fuzz_target(engine: Engines, target: Targets) -> Result<(), Error> {
     Ok(())
 }
 
-fn reproduce_crash(_client: Clients, _target: Targets, _crash_file: String) -> Result<(), Error> {
-    Ok(())
-}

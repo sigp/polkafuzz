@@ -15,3 +15,7 @@ pub fn smoldot_multiaddr_try_from(data: &[u8]) -> bool {
 pub fn smoldot_decode_babepredigest(data: &[u8]) -> bool {
     self::smoldot::smoldot_decode_babepredigest(data)
 }
+
+pub fn smoldot_publickey_from_protobuf_encoding(data: &[u8]) -> bool {
+    self::smoldot::smoldot_publickey_from_protobuf_encoding(data)
+}

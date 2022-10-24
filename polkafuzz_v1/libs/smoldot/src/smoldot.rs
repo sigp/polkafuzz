@@ -36,3 +36,12 @@ pub fn smoldot_decode_babepredigest(data: &[u8]) -> bool {
         true
     }
 }
+
+pub fn smoldot_publickey_from_protobuf_encoding(data: &[u8]) -> bool {
+    let ret = smoldot::libp2p::peer_id::PublicKey::from_protobuf_encoding(data);
+    if let Err(_) = ret {
+        false
+    } else {
+        true
+    }
+}

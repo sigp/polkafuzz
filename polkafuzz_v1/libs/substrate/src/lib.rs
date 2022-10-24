@@ -15,3 +15,7 @@ pub fn substrate_multiaddr_try_from(data: &[u8]) -> bool {
 pub fn substrate_decode_babepredigest(data: &[u8]) -> bool {
     self::substrate::substrate_decode_babepredigest(data)
 }
+
+pub fn substrate_publickey_from_protobuf_encoding(data: &[u8]) -> bool {
+    self::substrate::substrate_publickey_from_protobuf_encoding(data)
+}
