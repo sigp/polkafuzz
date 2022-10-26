@@ -49,6 +49,7 @@ arg_enum! {
         MultiaddrTryFrom,
         DecodeBabePreDigest,
         PublicKeyFromProtobufEncoding,
+        PeerIdFromBytes,
     }
 }
 
@@ -138,6 +139,11 @@ fn test(target: Targets) -> Result<(), Error> {
             substrate::substrate_publickey_from_protobuf_encoding(&test_input);
             gossamer::gossamer_publickey_from_proto(&test_input);
         }
+        Targets::PeerIdFromBytes => {
+            smoldot::smoldot_peerid_from_bytes(&test_input);
+            substrate::substrate_peerid_from_bytes(&test_input);
+            gossamer::gossamer_peerid_from_bytes(&test_input);
+        }
     }
     Ok(())
 }
@@ -149,6 +155,7 @@ fn fuzz_target(engine: Engines, target: Targets) -> Result<(), Error> {
         Targets::MultiaddrTryFrom => "multiaddr_try_from",
         Targets::DecodeBabePreDigest => "decode_babepredigest",
         Targets::PublicKeyFromProtobufEncoding => "publickey_from_protobuf_encoding",
+        Targets::PeerIdFromBytes => "peerid_from_bytes",
     };
     match engine {
         Engines::LibFuzzer => {

@@ -55,3 +55,13 @@ pub fn substrate_publickey_from_protobuf_encoding(data: &[u8]) -> bool {
         true
     }
 }
+
+pub fn substrate_peerid_from_bytes(data: &[u8]) -> bool {
+    let ret = libp2p::core::PeerId::from_bytes(data);
+    if let Err(_) = ret {
+        false
+    } else {
+        true
+    }
+}
+

@@ -83,3 +83,15 @@ name = "publickey_from_protobuf_encoding_libafl"
 path = "fuzz_targets/publickey_from_protobuf_encoding_libafl.rs"
 test = false
 doc = false
+
+[[bin]]
+name = "peerid_from_bytes_libfuzzer"
+path = "fuzz_targets/peerid_from_bytes_libfuzzer.rs"
+test = false
+doc = false
+
+[[bin]]
+name = "peerid_from_bytes_libafl"
+path = "fuzz_targets/peerid_from_bytes_libafl.rs"
+test = false
+doc = false

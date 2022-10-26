@@ -45,3 +45,12 @@ pub fn smoldot_publickey_from_protobuf_encoding(data: &[u8]) -> bool {
         true
     }
 }
+
+pub fn smoldot_peerid_from_bytes(data: &[u8]) -> bool {
+    let ret = smoldot::libp2p::peer_id::PeerId::from_bytes(data.to_vec());
+    if let Err(_) = ret {
+        false
+    } else {
+        true
+    }
+}
