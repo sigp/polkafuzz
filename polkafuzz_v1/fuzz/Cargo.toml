@@ -9,7 +9,7 @@ edition = "2018"
 cargo-fuzz = true
 
 [dependencies]
-libfuzzer-sys = "0.4.3"
+libfuzzer-sys = "0.4.5"
 cargo-libafl-helper = "0.1.0"
 arbitrary = { version = "1.1.0", features = ["derive"] }
 
@@ -93,5 +93,17 @@ doc = false
 [[bin]]
 name = "peerid_from_bytes_libafl"
 path = "fuzz_targets/peerid_from_bytes_libafl.rs"
+test = false
+doc = false
+
+[[bin]]
+name = "multihash_from_bytes_libfuzzer"
+path = "fuzz_targets/multihash_from_bytes_libfuzzer.rs"
+test = false
+doc = false
+
+[[bin]]
+name = "multihash_from_bytes_libafl"
+path = "fuzz_targets/multihash_from_bytes_libafl.rs"
 test = false
 doc = false

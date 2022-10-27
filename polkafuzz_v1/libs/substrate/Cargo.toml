@@ -8,6 +8,7 @@ edition = "2021"
 [dependencies]
 serde = { version = "1.0.136", features = ["derive"] }
 multiaddr = { version = "0.14.0" }
+multihash = { version = "0.16" }
 sc-chain-spec = { path = "../../../clients/substrate/client/chain-spec"}
 sp-consensus-babe = { path = "../../../clients/substrate/primitives/consensus/babe" }
 codec = { package = "parity-scale-codec", version = "3.0.0", default-features = false, features = ["derive"] }

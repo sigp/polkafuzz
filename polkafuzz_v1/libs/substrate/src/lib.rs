@@ -23,3 +23,7 @@ pub fn substrate_publickey_from_protobuf_encoding(data: &[u8]) -> bool {
 pub fn substrate_peerid_from_bytes(data: &[u8]) -> bool {
     self::substrate::substrate_peerid_from_bytes(data)
 }
+
+pub fn substrate_multihash_from_bytes(data: &[u8]) -> bool {
+    self::substrate::substrate_multihash_from_bytes(data)
+}

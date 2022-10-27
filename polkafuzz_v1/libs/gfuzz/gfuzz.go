@@ -8,7 +8,8 @@ import (
 
     "github.com/ChainSafe/gossamer/lib/genesis"
 	ma "github.com/multiformats/go-multiaddr"
-	"github.com/ChainSafe/gossamer/dot/types"
+	mh "github.com/multiformats/go-multihash"
+    "github.com/ChainSafe/gossamer/dot/types"
     "github.com/libp2p/go-libp2p-core/crypto"
     "github.com/libp2p/go-libp2p-core/peer"
 )
@@ -100,3 +101,16 @@ func gfuzz_peerid_from_bytes(data_ptr unsafe.Pointer, data_size int) bool {
     return true
 }
 
+//export gfuzz_multihash_from_bytes
+func gfuzz_multihash_from_bytes(data_ptr unsafe.Pointer, data_size int) bool {
+    var data []byte
+    sh := (*reflect.SliceHeader) (unsafe.Pointer(&data))
+    sh.Data = uintptr(data_ptr)
+    sh.Len = data_size
+    sh.Cap = data_size
+    _, _, err := mh.MHFromBytes(data)
+    if err != nil {
+        return false
+    }
+    return true
+}

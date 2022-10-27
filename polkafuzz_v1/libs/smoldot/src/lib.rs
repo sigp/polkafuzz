@@ -23,3 +23,7 @@ pub fn smoldot_publickey_from_protobuf_encoding(data: &[u8]) -> bool {
 pub fn smoldot_peerid_from_bytes(data: &[u8]) -> bool {
     self::smoldot::smoldot_peerid_from_bytes(data)
 }
+
+pub fn smoldot_multihash_from_bytes(data: &[u8]) -> bool {
+    self::smoldot::smoldot_multihash_from_bytes(data)
+}

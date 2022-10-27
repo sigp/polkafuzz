@@ -23,3 +23,7 @@ pub fn gossamer_publickey_from_proto(data: &[u8]) -> bool {
 pub fn gossamer_peerid_from_bytes(data: &[u8]) -> bool {
     self::gossamer::gossamer_peerid_from_bytes(data)
 }
+
+pub fn gossamer_multihash_from_bytes(data: &[u8]) -> bool {
+    self::gossamer::gossamer_multihash_from_bytes(data)
+}

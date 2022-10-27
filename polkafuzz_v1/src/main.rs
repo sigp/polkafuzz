@@ -47,6 +47,7 @@ arg_enum! {
         ChainSpec,
         MultiaddrFromStr,
         MultiaddrTryFrom,
+        MultihashFromBytes,
         DecodeBabePreDigest,
         PublicKeyFromProtobufEncoding,
         PeerIdFromBytes,
@@ -129,6 +130,11 @@ fn test(target: Targets) -> Result<(), Error> {
             substrate::substrate_multiaddr_try_from(&test_input);
             gossamer::gossamer_new_multiaddr_bytes(&test_input);
         }
+        Targets::MultihashFromBytes => {
+            smoldot::smoldot_multihash_from_bytes(&test_input);
+            substrate::substrate_multihash_from_bytes(&test_input);
+            gossamer::gossamer_multihash_from_bytes(&test_input);
+        }
         Targets::DecodeBabePreDigest => {
             smoldot::smoldot_decode_babepredigest(&test_input);
             substrate::substrate_decode_babepredigest(&test_input);
@@ -153,6 +159,7 @@ fn fuzz_target(engine: Engines, target: Targets) -> Result<(), Error> {
         Targets::ChainSpec => "chain_spec",
         Targets::MultiaddrFromStr => "multiaddr_from_str",
         Targets::MultiaddrTryFrom => "multiaddr_try_from",
+        Targets::MultihashFromBytes => "multihash_from_bytes",
         Targets::DecodeBabePreDigest => "decode_babepredigest",
         Targets::PublicKeyFromProtobufEncoding => "publickey_from_protobuf_encoding",
         Targets::PeerIdFromBytes => "peerid_from_bytes",

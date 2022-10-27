@@ -54,3 +54,12 @@ pub fn smoldot_peerid_from_bytes(data: &[u8]) -> bool {
         true
     }
 }
+
+pub fn smoldot_multihash_from_bytes(data: &[u8]) -> bool {
+    let ret = smoldot::libp2p::multihash::MultihashRef::from_bytes(data);
+    if let Err(_) = ret {
+        false
+    } else {
+        true
+    }
+}

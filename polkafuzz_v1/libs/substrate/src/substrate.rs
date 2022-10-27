@@ -65,3 +65,11 @@ pub fn substrate_peerid_from_bytes(data: &[u8]) -> bool {
     }
 }
 
+pub fn substrate_multihash_from_bytes(data: &[u8]) -> bool {
+    let ret = multihash::Multihash::from_bytes(data);
+    if let Err(_) = ret {
+        false
+    } else {
+        true
+    }
+}
