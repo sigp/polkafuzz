@@ -63,3 +63,12 @@ pub fn smoldot_multihash_from_bytes(data: &[u8]) -> bool {
         true
     }
 }
+
+pub fn smoldot_decode_babenextepoch(data: &[u8]) -> bool {
+    let ret = smoldot::header::BabeNextEpochRef::from_slice(data);
+    if let Err(_) = ret {
+        false
+    } else {
+        true
+    }
+}

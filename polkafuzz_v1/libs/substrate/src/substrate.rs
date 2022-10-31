@@ -3,7 +3,7 @@ use serde::{Deserialize, Serialize};
 use std::borrow::Cow;
 use std::collections::BTreeMap;
 use std::str::FromStr;
-use sp_consensus_babe::digests::PreDigest;
+use sp_consensus_babe::digests::{PreDigest, NextEpochDescriptor};
 use codec::Decode;
 
 pub fn substrate_chain_spec_from_json_bytes(data: &[u8]) -> bool {
@@ -67,6 +67,15 @@ pub fn substrate_peerid_from_bytes(data: &[u8]) -> bool {
 
 pub fn substrate_multihash_from_bytes(data: &[u8]) -> bool {
     let ret = multihash::Multihash::from_bytes(data);
+    if let Err(_) = ret {
+        false
+    } else {
+        true
+    }
+}
+
+pub fn substrate_decode_babenextepoch(mut data: &[u8]) -> bool {
+    let ret = NextEpochDescriptor::decode(&mut data);
     if let Err(_) = ret {
         false
     } else {

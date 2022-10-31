@@ -12,6 +12,7 @@ import (
     "github.com/ChainSafe/gossamer/dot/types"
     "github.com/libp2p/go-libp2p-core/crypto"
     "github.com/libp2p/go-libp2p-core/peer"
+    "github.com/ChainSafe/gossamer/pkg/scale"
 )
 
 func main() {}
@@ -114,3 +115,19 @@ func gfuzz_multihash_from_bytes(data_ptr unsafe.Pointer, data_size int) bool {
     }
     return true
 }
+
+//export gfuzz_decode_babenextepoch
+func gfuzz_decode_babenextepoch(data_ptr unsafe.Pointer, data_size int) bool {
+    var data []byte
+    sh := (*reflect.SliceHeader) (unsafe.Pointer(&data))
+    sh.Data = uintptr(data_ptr)
+    sh.Len = data_size
+    sh.Cap = data_size
+    dec := types.NextEpochData{}
+    err := scale.Unmarshal(data, &dec)
+    if err != nil {
+        return false
+    }
+    return true
+}
+

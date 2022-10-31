@@ -107,3 +107,15 @@ name = "multihash_from_bytes_libafl"
 path = "fuzz_targets/multihash_from_bytes_libafl.rs"
 test = false
 doc = false
+
+[[bin]]
+name = "decode_babenextepoch_libfuzzer"
+path = "fuzz_targets/decode_babenextepoch_libfuzzer.rs"
+test = false
+doc = false
+
+[[bin]]
+name = "decode_babenextepoch_libafl"
+path = "fuzz_targets/decode_babenextepoch_libafl.rs"
+test = false
+doc = false
