@@ -35,6 +35,8 @@ clean:
 	rm -rf Cargo.lock
 	cd fuzzers/smoldot/fuzz && cargo clean
 	rm -rf fuzzers/smoldot/fuzz/Cargo.lock
+	cd fuzzers/substrate/fuzz && cargo clean
+	rm -rf fuzzers/substrate/fuzz/Cargo.lock
 	
 
 # Update the submodules

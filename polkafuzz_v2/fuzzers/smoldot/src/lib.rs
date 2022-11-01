@@ -30,15 +30,3 @@ pub fn smoldot_decode_babenextepoch(data: &[u8]) -> bool {
     smoldot::smoldot_decode_babenextepoch(data)
 }
 
-/*
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
-    }
-}
-*/
