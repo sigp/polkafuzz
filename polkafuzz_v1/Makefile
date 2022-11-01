@@ -10,6 +10,7 @@ help:
 	@echo
 	@echo 'Usage:'
 	@echo '    make build 										Compile the project.'
+	@echo '    make build-gfuzz 								Compile the gossamer dependencies.'
 	@echo '    make fmt 										Run Rust fmt.'
 	@echo '    make update										Update submodules'
 	@echo '    make clean 										Clean the project artifacts.'	

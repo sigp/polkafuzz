@@ -1,0 +1,118 @@
+[package]
+name = "smoldot-fuzz"
+version = "0.0.0"
+authors = ["Automatically generated"]
+publish = false
+edition = "2018"
+
+[package.metadata]
+cargo-fuzz = true
+
+[dependencies]
+libfuzzer-sys = "0.4.5"
+cargo-libafl-helper = "0.1.0"
+arbitrary = { version = "1.1.0", features = ["derive"] }
+
+[dependencies.smoldot-lib]
+path = ".."
+
+# Prevent this from interfering with workspaces
+[workspace]
+members = ["."]
+
+[[bin]]
+name = "chain_spec_libfuzzer"
+path = "fuzz_targets/chain_spec_libfuzzer.rs"
+test = false
+doc = false
+
+[[bin]]
+name = "chain_spec_libafl"
+path = "fuzz_targets/chain_spec_libafl.rs"
+test = false
+doc = false
+
+[[bin]]
+name = "multiaddr_try_from_libfuzzer"
+path = "fuzz_targets/multiaddr_try_from_libfuzzer.rs"
+test = false
+doc = false
+
+[[bin]]
+name = "multiaddr_try_from_libafl"
+path = "fuzz_targets/multiaddr_try_from_libafl.rs"
+test = false
+doc = false
+
+[[bin]]
+name = "multiaddr_from_str_libfuzzer"
+path = "fuzz_targets/multiaddr_from_str_libfuzzer.rs"
+test = false
+doc = false
+
+[[bin]]
+name = "multiaddr_from_str_libafl"
+path = "fuzz_targets/multiaddr_from_str_libafl.rs"
+test = false
+doc = false
+
+[[bin]]
+name = "decode_babepredigest_libfuzzer"
+path = "fuzz_targets/decode_babepredigest_libfuzzer.rs"
+test = false
+doc = false
+
+[[bin]]
+name = "decode_babepredigest_libafl"
+path = "fuzz_targets/decode_babepredigest_libafl.rs"
+test = false
+doc = false
+
+[[bin]]
+name = "publickey_from_protobuf_encoding_libfuzzer"
+path = "fuzz_targets/publickey_from_protobuf_encoding_libfuzzer.rs"
+test = false
+doc = false
+
+[[bin]]
+name = "publickey_from_protobuf_encoding_libafl"
+path = "fuzz_targets/publickey_from_protobuf_encoding_libafl.rs"
+test = false
+doc = false
+
+[[bin]]
+name = "peerid_from_bytes_libfuzzer"
+path = "fuzz_targets/peerid_from_bytes_libfuzzer.rs"
+test = false
+doc = false
+
+[[bin]]
+name = "peerid_from_bytes_libafl"
+path = "fuzz_targets/peerid_from_bytes_libafl.rs"
+test = false
+doc = false
+
+[[bin]]
+name = "multihash_from_bytes_libfuzzer"
+path = "fuzz_targets/multihash_from_bytes_libfuzzer.rs"
+test = false
+doc = false
+
+[[bin]]
+name = "multihash_from_bytes_libafl"
+path = "fuzz_targets/multihash_from_bytes_libafl.rs"
+test = false
+doc = false
+
+[[bin]]
+name = "decode_babenextepoch_libfuzzer"
+path = "fuzz_targets/decode_babenextepoch_libfuzzer.rs"
+test = false
+doc = false
+
+[[bin]]
+name = "decode_babenextepoch_libafl"
+path = "fuzz_targets/decode_babenextepoch_libafl.rs"
+test = false
+doc = false
+

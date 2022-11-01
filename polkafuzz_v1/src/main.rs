@@ -63,15 +63,6 @@ arg_enum! {
     }
 }
 
-arg_enum! {
-    #[derive(Copy, Clone, StructOpt, Debug)]
-    enum Clients {
-        Gossamer,
-        Smoldot,
-        Substrate,
-    }
-}
-
 /// Parsing of CLI arguments
 fn run() -> Result<(), Error> {
     let cli = Cli::from_args();
@@ -206,4 +197,3 @@ fn fuzz_target(engine: Engines, target: Targets) -> Result<(), Error> {
     };
     Ok(())
 }
-
