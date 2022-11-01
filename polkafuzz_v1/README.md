@@ -7,35 +7,27 @@ This tool help to find logic bug using differential fuzzing accross multiple Pol
 Install rust fuzzers:
 
 ```
-
 cargo install -f cargo-fuzz
 
 cargo install -f cargo-libafl
-
 ```
 
 Update the submodules:
 
 ```
-
 make update
-
 ```
 
 Build ```Gossamer``` dependencies:
 
 ```
-
 make build-gfuzz
-
 ```
 
 Build ```polkafuzz_v1```:
 
 ```
-
 make build
-
 ```
 
 ```
@@ -56,7 +48,6 @@ SUBCOMMANDS:
     list         List all available fuzzing targets
     reproduce    Reproduce crash with crash file or hardcoded inputs
     test         Test a target with an empty input or hardcoded inputs
-
 ```
 
 List all targets:
@@ -68,15 +59,16 @@ List all targets:
     ChainSpec
     MultiaddrFromStr
     MultiaddrTryFrom
+    MultihashFromBytes
     DecodeBabePreDigest
-
+    PublicKeyFromProtobufEncoding
+    PeerIdFromBytes
+    DecodeBabeNextEpoch
 ```
 
 Run the fuzzers:
 
 ```
-./polkafuzz_v1 fuzz --help
-
 polkafuzz_v1-fuzz 0.1.0
 Run fuzzer
 
@@ -90,9 +82,8 @@ FLAGS:
 ARGS:
     <engine>     [possible values: LibFuzzer, LibAFL]
     <target>    Which target to run [possible values: ChainSpec, MultiaddrFromStr, MultiaddrTryFrom,
-                DecodeBabePreDigest]
-
-
+                MultihashFromBytes, DecodeBabePreDigest, PublicKeyFromProtobufEncoding, PeerIdFromBytes,
+                DecodeBabeNextEpoch]
 ```
 
 Example:
@@ -103,7 +94,7 @@ INFO: Running with entropic power schedule (0xFF, 100).
 INFO: Seed: 11919153
 INFO: Loaded 1 modules   (2893419 inline 8-bit counters): 2893419 [0x55ff81d84d10, 0x55ff8204737b), 
 INFO: Loaded 1 PC tables (2893419 PCs): 2893419 [0x55ff82047380,0x55ff84c6da30), 
-INFO:        0 files found in /home/armagan/workspace/polkafuzz/polkafuzz_v1/fuzz/corpus/decode_babepredigest_libfuzzer
+INFO:        0 files found in $HOME/workspace/polkafuzz/polkafuzz_v1/fuzz/corpus/decode_babepredigest_libfuzzer
 INFO: -max_len is not provided; libFuzzer will not generate inputs larger than 4096 bytes
 INFO: A corpus is not provided, starting from an empty corpus
 #2	INITED cov: 49 ft: 50 corp: 1/1b exec/s: 0 rss: 178Mb
@@ -120,5 +111,4 @@ INFO: A corpus is not provided, starting from an empty corpus
 #388	REDUCE cov: 89 ft: 100 corp: 6/16b lim: 6 exec/s: 0 rss: 180Mb L: 6/6 MS: 1 InsertRepeatedBytes-
 #397	REDUCE cov: 89 ft: 100 corp: 6/15b lim: 6 exec/s: 0 rss: 180Mb L: 5/5 MS: 4 PersAutoDict-CrossOver-ChangeBit-EraseBytes- DE: "\001\000"-
 #490	NEW    cov: 91 ft: 103 corp: 7/20b lim: 6 exec/s: 0 rss: 180Mb L: 5/5 MS: 3 CopyPart-CopyPart-InsertByte-
-
 ```
