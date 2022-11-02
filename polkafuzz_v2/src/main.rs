@@ -5,11 +5,12 @@ extern crate clap;
 extern crate failure;
 
 use failure::{Error, ResultExt};
+use std::env;
+use std::fs;
+use std::path::PathBuf;
 use std::process::Command;
 use structopt::StructOpt;
 use Cli::*;
-use std::env;
-use std::path::PathBuf;
 
 pub fn root_dir() -> Result<PathBuf, Error> {
     let p = env::var("CARGO_MANIFEST_DIR")
@@ -86,10 +87,13 @@ arg_enum! {
 /// Parsing of CLI arguments
 fn run() -> Result<(), Error> {
     let cli = Cli::from_args();
-
     match cli {
         // Fuzz targets
-        Fuzz { client, engine, target } => {
+        Fuzz {
+            client,
+            engine,
+            target,
+        } => {
             fuzz_target(client, engine, target)?;
         }
         // list all targets
@@ -120,13 +124,71 @@ fn list_targets() -> Result<(), Error> {
     Ok(())
 }
 
-fn rust_fuzzers(engine: Engines, target_name: &str, client_name: &str) -> Result<(),Error> {
+fn go_fuzzers(engine: Engines, target_name: &str) -> Result<(), Error> {
+    match engine {
+        Engines::LibFuzzer => {
+            fs::copy(
+                root_dir()?.join("polkafuzz_v2/fuzzers/gossamer/libfuzzer.go"),
+                root_dir()?.join("clients/gossamer/libfuzzer.go"),
+            )?;
+            let compile_lib = Command::new("go114-fuzz-build")
+                .arg("-tags=libffuzer")
+                .arg("-func")
+                .arg("Fuzz_".to_owned() + target_name)
+                .arg(root_dir()?.join("clients/gossamer"))
+                .current_dir(root_dir()?.join("clients/gossamer"))
+                .spawn()
+                .context(format!("go114-fuzz-build command failed to start"))?
+                .wait()
+                .context(format!("go114-fuzz-build command failed to wait"));
+            if !compile_lib.as_ref().unwrap().success() {
+                println!("{}", compile_lib.unwrap());
+                ::std::process::exit(1);
+            }
+            fs::copy(
+                root_dir()?.join("clients/gossamer/gossamer-fuzz.a"),
+                root_dir()?.join("polkafuzz_v2/fuzzers/gossamer/gossamer-fuzz.a"),
+            )?;
+            let compile_target = Command::new("clang")
+                .arg("-fsanitize=fuzzer")
+                .arg("gossamer-fuzz.a")
+                .arg("-o")
+                .arg(target_name.to_owned() + ".libfuzzer")
+                .current_dir(root_dir()?.join("polkafuzz_v2/fuzzers/gossamer"))
+                .spawn()
+                .context(format!("clang command failed to start"))?
+                .wait()
+                .context(format!("clag command failed to wait"));
+            if !compile_target.as_ref().unwrap().success() {
+                println!("{}", compile_target.unwrap());
+                ::std::process::exit(1);
+            }
+            let run = Command::new("./".to_owned() + target_name + ".libfuzzer")
+                .arg(corpora_dir()?.join(target_name))
+                .current_dir(root_dir()?.join("polkafuzz_v2/fuzzers/gossamer"))
+                .spawn()
+                .context(format!("error while starting for {} target", target_name))?
+                .wait()
+                .context(format!("error while waiting fot {} target", target_name));
+            if !run.as_ref().unwrap().success() {
+                println!("{}", run.unwrap());
+                ::std::process::exit(1);
+            }
+        }
+        Engines::LibAFL => {
+            eprintln!("[-] There is no LibAFL engine for go fuzzers");
+        }
+    };
+    Ok(())
+}
+
+fn rust_fuzzers(engine: Engines, target_name: &str, client_name: &str) -> Result<(), Error> {
     match engine {
         Engines::LibFuzzer => {
             let res = Command::new("cargo")
                 .arg("fuzz")
                 .arg("run")
-                .arg(target_name.to_owned() + "_libfuzzer")        
+                .arg(target_name.to_owned() + "_libfuzzer")
                 .arg(corpora_dir()?.join(target_name))
                 .current_dir("fuzzers/".to_owned() + client_name)
                 .spawn()
@@ -178,15 +240,11 @@ fn fuzz_target(client: Clients, engine: Engines, target: Targets) -> Result<(), 
         Clients::Smoldot => "smoldot",
     };
     match client {
-      Clients::Gossamer => {
-        //go_fuzzers(engine, target_name);
-      },
-      Clients::Substrate => {
-        rust_fuzzers(engine, target_name, client_name).unwrap()
-      },
-      Clients::Smoldot => {
-        rust_fuzzers(engine, target_name, client_name).unwrap()
-      },
+        Clients::Gossamer => {
+            go_fuzzers(engine, target_name).unwrap();
+        }
+        Clients::Substrate => rust_fuzzers(engine, target_name, client_name).unwrap(),
+        Clients::Smoldot => rust_fuzzers(engine, target_name, client_name).unwrap(),
     };
     Ok(())
 }

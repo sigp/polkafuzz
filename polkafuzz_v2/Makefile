@@ -37,7 +37,8 @@ clean:
 	rm -rf fuzzers/smoldot/fuzz/Cargo.lock
 	cd fuzzers/substrate/fuzz && cargo clean
 	rm -rf fuzzers/substrate/fuzz/Cargo.lock
-	
+	rm -rf fuzzers/gossamer/*.libfuzzer
+	rm -rf fuzzers/gossamer/gossamer-fuzz.a
 
 # Update the submodules
 update:

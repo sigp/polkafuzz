@@ -1,3 +1,5 @@
 target/
 polkafuzz_v2
 Cargo.lock
+fuzzers/gossamer/*.libfuzzer
+fuzzers/gossamer/gossamer-fuzz.a
