@@ -8,6 +8,20 @@ use failure::{Error, ResultExt};
 use std::process::Command;
 use structopt::StructOpt;
 use Cli::*;
+use std::env;
+use std::path::PathBuf;
+
+pub fn root_dir() -> Result<PathBuf, Error> {
+    let p = env::var("CARGO_MANIFEST_DIR")
+        .map(From::from)
+        .or_else(|_| env::current_dir())?;
+    Ok(p.parent().unwrap().to_path_buf())
+}
+
+pub fn corpora_dir() -> Result<PathBuf, Error> {
+    let p = root_dir()?.join("corpora");
+    Ok(p)
+}
 
 #[derive(StructOpt, Debug)]
 enum Cli {
@@ -112,7 +126,8 @@ fn rust_fuzzers(engine: Engines, target_name: &str, client_name: &str) -> Result
             let res = Command::new("cargo")
                 .arg("fuzz")
                 .arg("run")
-                .arg(target_name.to_owned() + "_libfuzzer")
+                .arg(target_name.to_owned() + "_libfuzzer")        
+                .arg(corpora_dir()?.join(target_name))
                 .current_dir("fuzzers/".to_owned() + client_name)
                 .spawn()
                 .context(format!("cargo command failed to start"))?
@@ -128,6 +143,7 @@ fn rust_fuzzers(engine: Engines, target_name: &str, client_name: &str) -> Result
                 .arg("libafl")
                 .arg("run")
                 .arg(target_name.to_owned() + "_libafl")
+                .arg(corpora_dir()?.join(target_name))
                 .arg("--")
                 .arg("--cores")
                 .arg("1")

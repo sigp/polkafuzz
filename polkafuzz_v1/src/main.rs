@@ -8,6 +8,7 @@ use failure::{Error, ResultExt};
 use std::process::Command;
 use structopt::StructOpt;
 use Cli::*;
+use polkafuzz_v1::corpora_dir;
 
 #[derive(StructOpt, Debug)]
 enum Cli {
@@ -168,6 +169,7 @@ fn fuzz_target(engine: Engines, target: Targets) -> Result<(), Error> {
                 .arg("fuzz")
                 .arg("run")
                 .arg(target_name.to_owned() + "_libfuzzer")
+                .arg(corpora_dir()?.join(target_name))
                 .spawn()
                 .context(format!("cargo command failed to start"))?
                 .wait()
@@ -182,6 +184,7 @@ fn fuzz_target(engine: Engines, target: Targets) -> Result<(), Error> {
                 .arg("libafl")
                 .arg("run")
                 .arg(target_name.to_owned() + "_libafl")
+                .arg(corpora_dir()?.join(target_name))
                 .arg("--")
                 .arg("--cores")
                 .arg("1")
