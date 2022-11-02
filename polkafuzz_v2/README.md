@@ -12,6 +12,14 @@ cargo install -f cargo-fuzz
 cargo install -f cargo-libafl
 ```
 
+Install go fuzzers:
+
+```
+go install github.com/dvyukov/go-fuzz/go-fuzz@latest github.com/dvyukov/go-fuzz/go-fuzz-build@latest
+
+go install github.com/mdempsky/go114-fuzz-build@latest
+```
+
 Update the submodules:
 
 ```
