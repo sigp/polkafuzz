@@ -1,4 +1,4 @@
-use std::str::FromStr;
+use core::str::FromStr;
 
 pub fn smoldot_chain_spec_from_json_bytes(data: &[u8]) -> bool {
     let ret = smoldot::chain_spec::ChainSpec::from_json_bytes(data);
