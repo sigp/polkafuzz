@@ -9,11 +9,11 @@ help:
 	@echo 'Management commands for reproducer'
 	@echo
 	@echo 'Usage:'
-	@echo '    make build 										Compile the project.'
-	@echo '    make build-glib 								    Compile the gossamer dependencies.'
-	@echo '    make fmt 										Run Rust fmt.'
-	@echo '    make update										Update submodules'
-	@echo '    make clean 										Clean the project artifacts.'	
+	@echo '    make build           Compile the project.'
+	@echo '    make build-glib      Compile the gossamer dependencies.'
+	@echo '    make fmt             Run Rust and Go fmt.'
+	@echo '    make update          Update submodules'
+	@echo '    make clean           Clean the project artifacts.'	
 
 
 # Compile the project
@@ -37,6 +37,9 @@ run: build
 # Run Rust fmt to make code cleaner
 fmt:
 	cargo fmt --all
+	cp libs/glib/glib.go $(WORKSPACE_DIR)/clients/gossamer && \
+	cd $(WORKSPACE_DIR)/clients/gossamer && go fmt glib.go && \
+	mv glib.go $(WORKSPACE_DIR)/reproducer/libs/glib/glib.go
 
 # Clean the project.
 clean:

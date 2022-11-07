@@ -149,6 +149,9 @@ fn go_fuzzers(engine: Engines, target_name: &str) -> Result<(), Error> {
                 root_dir()?.join("clients/gossamer/gossamer-fuzz.a"),
                 root_dir()?.join("polkafuzz_v2/fuzzers/gossamer/gossamer-fuzz.a"),
             )?;
+            fs::remove_file(root_dir()?.join("clients/gossamer/gossamer-fuzz.a"))?;
+            fs::remove_file(root_dir()?.join("clients/gossamer/gossamer-fuzz.h"))?;
+            fs::remove_file(root_dir()?.join("clients/gossamer/libfuzzer.go"))?;
             let compile_target = Command::new("clang")
                 .arg("-fsanitize=fuzzer")
                 .arg("gossamer-fuzz.a")
@@ -158,7 +161,7 @@ fn go_fuzzers(engine: Engines, target_name: &str) -> Result<(), Error> {
                 .spawn()
                 .context(format!("clang command failed to start"))?
                 .wait()
-                .context(format!("clag command failed to wait"));
+                .context(format!("clang command failed to wait"));
             if !compile_target.as_ref().unwrap().success() {
                 println!("{}", compile_target.unwrap());
                 ::std::process::exit(1);

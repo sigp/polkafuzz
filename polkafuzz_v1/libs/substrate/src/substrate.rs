@@ -1,10 +1,10 @@
+use codec::Decode;
 use sc_chain_spec::GenericChainSpec;
 use serde::{Deserialize, Serialize};
+use sp_consensus_babe::digests::{NextEpochDescriptor, PreDigest};
 use std::borrow::Cow;
 use std::collections::BTreeMap;
 use std::str::FromStr;
-use sp_consensus_babe::digests::{PreDigest, NextEpochDescriptor};
-use codec::Decode;
 
 pub fn substrate_chain_spec_from_json_bytes(data: &[u8]) -> bool {
     #[derive(Debug, Serialize, Deserialize)]
@@ -25,12 +25,12 @@ pub fn substrate_multiaddr_try_from(data: &[u8]) -> bool {
     } else {
         true
     }
-
 }
 
 pub fn substrate_multiaddr_from_str(data: &[u8]) -> bool {
     let data_str = String::from_utf8_lossy(data);
-    let ret = multiaddr::Multiaddr::from_str(&data_str);
+    let vec: Vec<&str> = data_str.split("\n").collect();
+    let ret = multiaddr::Multiaddr::from_str(vec[0]);
     if let Err(_) = ret {
         false
     } else {

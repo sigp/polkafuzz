@@ -1,5 +1,5 @@
 .PHONY: default help build fmt clean  
-WORKSPACE_DIR := $(realpath ../polkafuzz_v2)
+WORKSPACE_DIR := $(realpath ../)
 #
 # Utils for polkafuzz_v2.
 #
@@ -9,10 +9,10 @@ help:
 	@echo 'Management commands for polkafuzz_v2'
 	@echo
 	@echo 'Usage:'
-	@echo '    make build 										Compile the project.'
-	@echo '    make fmt 										Run Rust fmt.'
-	@echo '    make update										Update submodules'
-	@echo '    make clean 										Clean the project artifacts.'	
+	@echo '    make build           Compile the project.'
+	@echo '    make fmt             Run Rust and Go fmt.'
+	@echo '    make update          Update submodules'
+	@echo '    make clean           Clean the project artifacts.'	
 
 
 # Compile the project
@@ -27,6 +27,9 @@ run: build
 # Run Rust fmt to make code cleaner
 fmt:
 	cargo fmt --all
+	cp fuzzers/gossamer/libfuzzer.go $(WORKSPACE_DIR)/clients/gossamer && \
+	cd $(WORKSPACE_DIR)/clients/gossamer && go fmt libfuzzer.go && \
+	mv libfuzzer.go $(WORKSPACE_DIR)/polkafuzz_v2/fuzzers/gossamer/libfuzzer.go
 
 # Clean the project.
 clean:

@@ -78,4 +78,3 @@ pub fn gossamer_decode_babenextepoch(file_name: &String) {
     let data_size: usize = buf.len() as usize;
     unsafe { glib_decode_babenextepoch(data_ptr, data_size) };
 }
-

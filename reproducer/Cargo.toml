@@ -12,3 +12,4 @@ failure = "0.1.8"
 smoldot-lib = { path = "libs/smoldot" }
 substrate-lib = { path = "libs/substrate" }
 gossamer-lib = { path = "libs/gossamer" }
+

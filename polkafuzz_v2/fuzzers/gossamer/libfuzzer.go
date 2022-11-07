@@ -9,6 +9,7 @@ import (
 	"github.com/libp2p/go-libp2p-core/peer"
 	ma "github.com/multiformats/go-multiaddr"
 	mh "github.com/multiformats/go-multihash"
+	"strings"
 )
 
 const (
@@ -27,7 +28,8 @@ func Fuzz_chain_spec(data []byte) int {
 }
 
 func Fuzz_multiaddr_from_str(data []byte) int {
-	_, err := ma.NewMultiaddr(string(data[:]))
+	data_str := strings.Split(string(data[:]), "\n")
+	_, err := ma.NewMultiaddr(data_str[0])
 	if err != nil {
 		return fuzzNormal
 	}

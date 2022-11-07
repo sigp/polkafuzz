@@ -4,6 +4,7 @@ import "C"
 import (
 	"encoding/json"
 	"reflect"
+	"strings"
 	"unsafe"
 
 	"github.com/ChainSafe/gossamer/dot/types"
@@ -53,7 +54,8 @@ func gfuzz_new_multiaddr(data_ptr unsafe.Pointer, data_size int) bool {
 	sh.Data = uintptr(data_ptr)
 	sh.Len = data_size
 	sh.Cap = data_size
-	_, err := ma.NewMultiaddr(string(data[:]))
+	data_str := strings.Split(string(data[:]), "\n")
+	_, err := ma.NewMultiaddr(data_str[0])
 	if err != nil {
 		return false
 	}

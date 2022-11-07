@@ -1,8 +1,8 @@
+use core::str::FromStr;
 use std::fs::File;
 use std::io::BufReader;
 use std::io::Error;
 use std::io::Read;
-use core::str::FromStr;
 
 fn read_bytes(f_name: &String) -> Result<Vec<u8>, Error> {
     let f = File::open(f_name)?;
@@ -23,12 +23,12 @@ pub fn smoldot_chain_spec_from_json_bytes(file_name: &String) {
     }
 }
 
-
-pub fn smoldot_multiaddr_from_str(file_name: &String) { 
+pub fn smoldot_multiaddr_from_str(file_name: &String) {
     println!("[+] Smoldot Result:");
     let buf = read_bytes(file_name).unwrap();
     let buf_str = String::from_utf8_lossy(&buf);
-    let ret = smoldot::libp2p::multiaddr::Multiaddr::from_str(&buf_str);
+    let vec: Vec<&str> = buf_str.split("\n").collect();
+    let ret = smoldot::libp2p::multiaddr::Multiaddr::from_str(vec[0]);
     if let Err(_) = ret {
         println!("[-] Multiaddr from_str result: {:?}", ret);
     } else {
@@ -101,4 +101,3 @@ pub fn smoldot_decode_babenextepoch(file_name: &String) {
         println!("[+] BabeNextEpoch from_bytes result: {:?}", ret);
     }
 }
-

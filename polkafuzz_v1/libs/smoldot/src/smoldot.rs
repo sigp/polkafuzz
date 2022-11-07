@@ -20,7 +20,8 @@ pub fn smoldot_multiaddr_try_from(data: &[u8]) -> bool {
 
 pub fn smoldot_multiaddr_from_str(data: &[u8]) -> bool {
     let data_str = String::from_utf8_lossy(data);
-    let ret = smoldot::libp2p::multiaddr::Multiaddr::from_str(&data_str);
+    let vec: Vec<&str> = data_str.split("\n").collect();
+    let ret = smoldot::libp2p::multiaddr::Multiaddr::from_str(vec[0]);
     if let Err(_) = ret {
         false
     } else {

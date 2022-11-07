@@ -5,10 +5,10 @@ extern crate clap;
 extern crate failure;
 
 use failure::{Error, ResultExt};
+use polkafuzz_v1::corpora_dir;
 use std::process::Command;
 use structopt::StructOpt;
 use Cli::*;
-use polkafuzz_v1::corpora_dir;
 
 #[derive(StructOpt, Debug)]
 enum Cli {
