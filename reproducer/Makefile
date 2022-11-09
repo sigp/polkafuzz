@@ -19,7 +19,7 @@ help:
 # Compile the project
 build:
 	RUSTFLAGS="-Clink-arg=-Wl,--allow-multiple-definition" \
-	cargo build --release --out-dir=. -Z unstable-options
+	cargo build --out-dir=. -Z unstable-options
 
 # Build glib
 build-glib:
