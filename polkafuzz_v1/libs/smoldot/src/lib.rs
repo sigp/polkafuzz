@@ -31,3 +31,7 @@ pub fn smoldot_multihash_from_bytes(data: &[u8]) -> bool {
 pub fn smoldot_decode_babenextepoch(data: &[u8]) -> bool {
     self::smoldot::smoldot_decode_babenextepoch(data)
 }
+
+pub fn smoldot_decode_header(data: &[u8]) -> bool {
+    self::smoldot::smoldot_decode_header(data)
+}

@@ -82,6 +82,7 @@ extern GoUint8 gfuzz_publickey_from_proto(void* data_ptr, GoInt data_size);
 extern GoUint8 gfuzz_peerid_from_bytes(void* data_ptr, GoInt data_size);
 extern GoUint8 gfuzz_multihash_from_bytes(void* data_ptr, GoInt data_size);
 extern GoUint8 gfuzz_decode_babenextepoch(void* data_ptr, GoInt data_size);
+extern GoUint8 gfuzz_decode_header(void* data_ptr, GoInt data_size);
 
 #ifdef __cplusplus
 }

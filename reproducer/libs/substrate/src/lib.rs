@@ -2,6 +2,8 @@ use codec::Decode;
 use sc_chain_spec::GenericChainSpec;
 use serde::{Deserialize, Serialize};
 use sp_consensus_babe::digests::{NextEpochDescriptor, PreDigest};
+use sp_runtime::generic::Header;
+use sp_runtime::traits::BlakeTwo256;
 use std::borrow::Cow;
 use std::collections::BTreeMap;
 use std::fs::File;
@@ -109,5 +111,17 @@ pub fn substrate_decode_babenextepoch(file_name: &String) {
         println!("[-] BabeNextEpoch decode result: {:?}", ret);
     } else {
         println!("[+] BabeNexetEpoch decode result: {:?}", ret);
+    }
+}
+
+pub fn substrate_decode_header(file_name: &String) {
+    println!("[+] Substrate Result:");
+    let buf = read_bytes(file_name).unwrap();
+    let mut data: &[u8] = buf.as_ref();
+    let ret = Header::<u32, BlakeTwo256>::decode(&mut data);
+    if let Err(_) = ret {
+        println!("[-] Header decode result: {:?}", ret);
+    } else {
+        println!("[+] Header decode result: {:?}", ret);
     }
 }

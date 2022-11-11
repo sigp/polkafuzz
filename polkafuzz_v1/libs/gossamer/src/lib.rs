@@ -31,3 +31,7 @@ pub fn gossamer_multihash_from_bytes(data: &[u8]) -> bool {
 pub fn gossamer_decode_babenextepoch(data: &[u8]) -> bool {
     self::gossamer::gossamer_decode_babenextepoch(data)
 }
+
+pub fn gossamer_decode_header(data: &[u8]) -> bool {
+    self::gossamer::gossamer_decode_header(data)
+}

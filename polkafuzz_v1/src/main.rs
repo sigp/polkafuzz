@@ -53,6 +53,7 @@ arg_enum! {
         PublicKeyFromProtobufEncoding,
         PeerIdFromBytes,
         DecodeBabeNextEpoch,
+        DecodeHeader,
     }
 }
 
@@ -148,6 +149,11 @@ fn test(target: Targets) -> Result<(), Error> {
             substrate::substrate_decode_babenextepoch(&test_input);
             gossamer::gossamer_decode_babenextepoch(&test_input);
         }
+        Targets::DecodeHeader => {
+            smoldot::smoldot_decode_header(&test_input);
+            substrate::substrate_decode_header(&test_input);
+            gossamer::gossamer_decode_header(&test_input);
+        }
     }
     Ok(())
 }
@@ -162,6 +168,7 @@ fn fuzz_target(engine: Engines, target: Targets) -> Result<(), Error> {
         Targets::PublicKeyFromProtobufEncoding => "publickey_from_protobuf_encoding",
         Targets::PeerIdFromBytes => "peerid_from_bytes",
         Targets::DecodeBabeNextEpoch => "decode_babenextepoch",
+        Targets::DecodeHeader => "decode_header",
     };
     match engine {
         Engines::LibFuzzer => {

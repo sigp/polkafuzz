@@ -64,6 +64,7 @@ arg_enum! {
         PublicKeyFromProtobufEncoding,
         PeerIdFromBytes,
         DecodeBabeNextEpoch,
+        DecodeHeader,
     }
 }
 
@@ -236,6 +237,7 @@ fn fuzz_target(client: Clients, engine: Engines, target: Targets) -> Result<(), 
         Targets::PublicKeyFromProtobufEncoding => "publickey_from_protobuf_encoding",
         Targets::PeerIdFromBytes => "peerid_from_bytes",
         Targets::DecodeBabeNextEpoch => "decode_babenextepoch",
+        Targets::DecodeHeader => "decode_header",
     };
     let client_name = match client {
         Clients::Gossamer => "gossamer",

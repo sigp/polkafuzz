@@ -30,3 +30,6 @@ pub fn smoldot_decode_babenextepoch(data: &[u8]) -> bool {
     smoldot::smoldot_decode_babenextepoch(data)
 }
 
+pub fn smoldot_decode_header(data: &[u8]) -> bool {
+    smoldot::smoldot_decode_header(data)
+}

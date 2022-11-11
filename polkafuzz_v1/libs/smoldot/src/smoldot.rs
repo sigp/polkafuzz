@@ -73,3 +73,12 @@ pub fn smoldot_decode_babenextepoch(data: &[u8]) -> bool {
         true
     }
 }
+
+pub fn smoldot_decode_header(data: &[u8]) -> bool {
+    let ret = smoldot::header::decode(data, usize::from(data[0]) + 1);
+    if let Err(_) = ret {
+        false
+    } else {
+        true
+    }
+}

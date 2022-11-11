@@ -31,3 +31,7 @@ pub fn substrate_multihash_from_bytes(data: &[u8]) -> bool {
 pub fn substrate_decode_babenextepoch(data: &[u8]) -> bool {
     self::substrate::substrate_decode_babenextepoch(data)
 }
+
+pub fn substrate_decode_header(data: &[u8]) -> bool {
+    self::substrate::substrate_decode_header(data)
+}

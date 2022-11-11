@@ -2,6 +2,8 @@ use codec::Decode;
 use sc_chain_spec::GenericChainSpec;
 use serde::{Deserialize, Serialize};
 use sp_consensus_babe::digests::{NextEpochDescriptor, PreDigest};
+use sp_runtime::generic::Header;
+use sp_runtime::traits::BlakeTwo256;
 use std::borrow::Cow;
 use std::collections::BTreeMap;
 use std::str::FromStr;
@@ -76,6 +78,15 @@ pub fn substrate_multihash_from_bytes(data: &[u8]) -> bool {
 
 pub fn substrate_decode_babenextepoch(mut data: &[u8]) -> bool {
     let ret = NextEpochDescriptor::decode(&mut data);
+    if let Err(_) = ret {
+        false
+    } else {
+        true
+    }
+}
+
+pub fn substrate_decode_header(mut data: &[u8]) -> bool {
+    let ret = Header::<u32, BlakeTwo256>::decode(&mut data);
     if let Err(_) = ret {
         false
     } else {

@@ -13,6 +13,7 @@ extern "C" {
     pub fn glib_publickey_from_protobuf_encoding(data_ptr: *mut u8, data_size: usize);
     pub fn glib_peerid_from_bytes(data_ptr: *mut u8, data_size: usize);
     pub fn glib_decode_babenextepoch(data_ptr: *mut u8, data_size: usize);
+    pub fn glib_decode_header(data_ptr: *mut u8, data_size: usize);
 }
 
 fn read_bytes(f_name: &String) -> Result<Vec<u8>, Error> {
@@ -77,4 +78,11 @@ pub fn gossamer_decode_babenextepoch(file_name: &String) {
     let data_ptr: *mut u8 = buf.as_mut_ptr();
     let data_size: usize = buf.len() as usize;
     unsafe { glib_decode_babenextepoch(data_ptr, data_size) };
+}
+
+pub fn gossamer_decode_header(file_name: &String) {
+    let mut buf = read_bytes(file_name).unwrap();
+    let data_ptr: *mut u8 = buf.as_mut_ptr();
+    let data_size: usize = buf.len() as usize;
+    unsafe { glib_decode_header(data_ptr, data_size) };
 }

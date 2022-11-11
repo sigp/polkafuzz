@@ -149,3 +149,20 @@ func glib_decode_babenextepoch(data_ptr unsafe.Pointer, data_size int) {
 		fmt.Println("[+] BabeNextEpoch scale.Unmarshal result:", dec)
 	}
 }
+
+//export glib_decode_header
+func glib_decode_header(data_ptr unsafe.Pointer, data_size int) {	
+	fmt.Println("[+] Gossamer Result:")
+    var data []byte
+	sh := (*reflect.SliceHeader)(unsafe.Pointer(&data))
+	sh.Data = uintptr(data_ptr)
+	sh.Len = data_size
+	sh.Cap = data_size
+	dec := types.NewEmptyHeader()
+	err := scale.Unmarshal(data, &dec)
+	if err != nil {
+		fmt.Println("[-] Header scale.Unmarshal result:", err)
+	} else {
+		fmt.Println("[+] Header scale.Unmarshal result:", dec)
+	}
+}

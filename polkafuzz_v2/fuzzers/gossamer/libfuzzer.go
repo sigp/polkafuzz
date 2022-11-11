@@ -84,3 +84,12 @@ func Fuzz_decode_babenextepoch(data []byte) int {
 	}
 	return fuzzInteresting
 }
+
+func Fuzz_decode_header(data []byte) int {
+	dec := types.NewEmptyHeader()
+	err := scale.Unmarshal(data, &dec)
+	if err != nil {
+		return fuzzNormal
+	}
+	return fuzzInteresting
+}

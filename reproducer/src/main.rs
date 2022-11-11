@@ -44,6 +44,7 @@ arg_enum! {
         PublicKeyFromProtobufEncoding,
         PeerIdFromBytes,
         DecodeBabeNextEpoch,
+        DecodeHeader,
     }
 }
 
@@ -123,6 +124,9 @@ fn run_gossamer(target: Targets, file_name: String) {
         Targets::DecodeBabeNextEpoch => {
             gossamer_lib::gossamer_decode_babenextepoch(&file_name);
         }
+        Targets::DecodeHeader => {
+            gossamer_lib::gossamer_decode_header(&file_name);
+        }
     };
 }
 
@@ -152,6 +156,9 @@ fn run_substrate(target: Targets, file_name: String) {
         Targets::DecodeBabeNextEpoch => {
             substrate_lib::substrate_decode_babenextepoch(&file_name);
         }
+        Targets::DecodeHeader => {
+            substrate_lib::substrate_decode_header(&file_name);
+        }
     };
 }
 
@@ -180,6 +187,9 @@ fn run_smoldot(target: Targets, file_name: String) {
         }
         Targets::DecodeBabeNextEpoch => {
             smoldot_lib::smoldot_decode_babenextepoch(&file_name);
+        }
+        Targets::DecodeHeader => {
+            smoldot_lib::smoldot_decode_header(&file_name);
         }
     };
 }
@@ -225,6 +235,11 @@ fn run_all(target: Targets, file_name: String) {
             smoldot_lib::smoldot_decode_babenextepoch(&file_name);
             substrate_lib::substrate_decode_babenextepoch(&file_name);
             gossamer_lib::gossamer_decode_babenextepoch(&file_name);
+        }
+        Targets::DecodeHeader => {
+            smoldot_lib::smoldot_decode_header(&file_name);
+            substrate_lib::substrate_decode_header(&file_name);
+            gossamer_lib::gossamer_decode_header(&file_name);
         }
     };
 }

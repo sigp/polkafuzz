@@ -116,3 +116,15 @@ path = "fuzz_targets/decode_babenextepoch_libafl.rs"
 test = false
 doc = false
 
+
+[[bin]]
+name = "decode_header_libfuzzer"
+path = "fuzz_targets/decode_header_libfuzzer.rs"
+test = false
+doc = false
+
+[[bin]]
+name = "decode_header_libafl"
+path = "fuzz_targets/decode_header_libafl.rs"
+test = false
+doc = false

@@ -101,3 +101,14 @@ pub fn smoldot_decode_babenextepoch(file_name: &String) {
         println!("[+] BabeNextEpoch from_bytes result: {:?}", ret);
     }
 }
+
+pub fn smoldot_decode_header(file_name: &String) {
+    println!("[+] Smoldot Result:");
+    let buf = read_bytes(file_name).unwrap();
+    let ret = smoldot::header::decode(&buf, usize::from(buf[0]) + 1);
+    if let Err(_) = ret {
+        println!("[-] Header decode result: {:?}", ret);
+    } else {
+        println!("[+] Header decode result: {:?}", ret);
+    }
+}

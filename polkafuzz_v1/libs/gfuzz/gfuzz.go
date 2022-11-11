@@ -132,3 +132,18 @@ func gfuzz_decode_babenextepoch(data_ptr unsafe.Pointer, data_size int) bool {
 	}
 	return true
 }
+
+//export gfuzz_decode_header
+func gfuzz_decode_header(data_ptr unsafe.Pointer, data_size int) bool {
+	var data []byte
+	sh := (*reflect.SliceHeader)(unsafe.Pointer(&data))
+	sh.Data = uintptr(data_ptr)
+	sh.Len = data_size
+	sh.Cap = data_size
+	dec := types.NewEmptyHeader()
+	err := scale.Unmarshal(data, &dec)
+	if err != nil {
+		return false
+	}
+	return true
+}

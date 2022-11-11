@@ -82,6 +82,7 @@ extern void glib_decode_babepredigest(void* data_ptr, GoInt data_size);
 extern void glib_publickey_from_protobuf_encoding(void* data_ptr, GoInt data_size);
 extern void glib_peerid_from_bytes(void* data_ptr, GoInt data_size);
 extern void glib_decode_babenextepoch(void* data_ptr, GoInt data_size);
+extern void glib_decode_header(void* data_ptr, GoInt data_size);
 
 #ifdef __cplusplus
 }
