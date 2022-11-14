@@ -168,6 +168,7 @@ fn go_fuzzers(engine: Engines, target_name: &str) -> Result<(), Error> {
                 ::std::process::exit(1);
             }
             let run = Command::new("./".to_owned() + target_name + ".libfuzzer")
+                .arg("-rss_limit_mb=0")
                 .arg(corpora_dir()?.join(target_name))
                 .current_dir(root_dir()?.join("polkafuzz_v2/fuzzers/gossamer"))
                 .spawn()
@@ -193,6 +194,7 @@ fn rust_fuzzers(engine: Engines, target_name: &str, client_name: &str) -> Result
                 .arg("fuzz")
                 .arg("run")
                 .arg(target_name.to_owned() + "_libfuzzer")
+                .arg("-rss_limit_mb=0")
                 .arg(corpora_dir()?.join(target_name))
                 .current_dir("fuzzers/".to_owned() + client_name)
                 .spawn()

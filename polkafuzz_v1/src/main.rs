@@ -177,6 +177,8 @@ fn fuzz_target(engine: Engines, target: Targets) -> Result<(), Error> {
                 .arg("run")
                 .arg(target_name.to_owned() + "_libfuzzer")
                 .arg(corpora_dir()?.join(target_name))
+                .arg("--")
+                .arg("-rss_limit_mb=0")
                 .spawn()
                 .context(format!("cargo command failed to start"))?
                 .wait()
