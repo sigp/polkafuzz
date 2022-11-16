@@ -151,9 +151,9 @@ func glib_decode_babenextepoch(data_ptr unsafe.Pointer, data_size int) {
 }
 
 //export glib_decode_header
-func glib_decode_header(data_ptr unsafe.Pointer, data_size int) {	
+func glib_decode_header(data_ptr unsafe.Pointer, data_size int) {
 	fmt.Println("[+] Gossamer Result:")
-    var data []byte
+	var data []byte
 	sh := (*reflect.SliceHeader)(unsafe.Pointer(&data))
 	sh.Data = uintptr(data_ptr)
 	sh.Len = data_size

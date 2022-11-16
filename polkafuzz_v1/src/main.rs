@@ -180,9 +180,9 @@ fn fuzz_target(engine: Engines, target: Targets) -> Result<(), Error> {
                 .arg("--")
                 .arg("-rss_limit_mb=0")
                 .spawn()
-                .context(format!("cargo command failed to start"))?
+                .context("cargo command failed to start".to_string())?
                 .wait()
-                .context(format!("cargo command failed to wait"));
+                .context("cargo command failed to wait".to_string());
             if !res.as_ref().unwrap().success() {
                 println!("{}", res.unwrap());
                 ::std::process::exit(1);
@@ -198,9 +198,9 @@ fn fuzz_target(engine: Engines, target: Targets) -> Result<(), Error> {
                 .arg("--cores")
                 .arg("1")
                 .spawn()
-                .context(format!("cargo command failed to start"))?
+                .context("cargo command failed to start".to_string())?
                 .wait()
-                .context(format!("cargo command failed to wait"));
+                .context("cargo command failed to wait".to_string());
             if !res.as_ref().unwrap().success() {
                 println!("{}", res.unwrap());
                 ::std::process::exit(1);

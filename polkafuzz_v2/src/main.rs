@@ -139,9 +139,9 @@ fn go_fuzzers(engine: Engines, target_name: &str) -> Result<(), Error> {
                 .arg(root_dir()?.join("clients/gossamer"))
                 .current_dir(root_dir()?.join("clients/gossamer"))
                 .spawn()
-                .context(format!("go114-fuzz-build command failed to start"))?
+                .context("go114-fuzz-build command failed to start".to_string())?
                 .wait()
-                .context(format!("go114-fuzz-build command failed to wait"));
+                .context("go114-fuzz-build command failed to wait".to_string());
             if !compile_lib.as_ref().unwrap().success() {
                 println!("{}", compile_lib.unwrap());
                 ::std::process::exit(1);
@@ -160,9 +160,9 @@ fn go_fuzzers(engine: Engines, target_name: &str) -> Result<(), Error> {
                 .arg(target_name.to_owned() + ".libfuzzer")
                 .current_dir(root_dir()?.join("polkafuzz_v2/fuzzers/gossamer"))
                 .spawn()
-                .context(format!("clang command failed to start"))?
+                .context("clang command failed to start".to_string())?
                 .wait()
-                .context(format!("clang command failed to wait"));
+                .context("clang command failed to wait".to_string());
             if !compile_target.as_ref().unwrap().success() {
                 println!("{}", compile_target.unwrap());
                 ::std::process::exit(1);
@@ -199,9 +199,9 @@ fn rust_fuzzers(engine: Engines, target_name: &str, client_name: &str) -> Result
                 .arg(corpora_dir()?.join(target_name))
                 .current_dir("fuzzers/".to_owned() + client_name)
                 .spawn()
-                .context(format!("cargo command failed to start"))?
+                .context("cargo command failed to start".to_string())?
                 .wait()
-                .context(format!("cargo command failed to wait"));
+                .context("cargo command failed to wait".to_string());
             if !res.as_ref().unwrap().success() {
                 println!("{}", res.unwrap());
                 ::std::process::exit(1);
@@ -218,9 +218,9 @@ fn rust_fuzzers(engine: Engines, target_name: &str, client_name: &str) -> Result
                 .arg("1")
                 .current_dir("fuzzers/".to_owned() + client_name)
                 .spawn()
-                .context(format!("cargo command failed to start"))?
+                .context("cargo command failed to start".to_string())?
                 .wait()
-                .context(format!("cargo command failed to wait"));
+                .context("cargo command failed to wait".to_string());
             if !res.as_ref().unwrap().success() {
                 println!("{}", res.unwrap());
                 ::std::process::exit(1);
