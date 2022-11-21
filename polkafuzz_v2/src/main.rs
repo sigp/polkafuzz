@@ -194,9 +194,9 @@ fn rust_fuzzers(engine: Engines, target_name: &str, client_name: &str) -> Result
                 .arg("fuzz")
                 .arg("run")
                 .arg(target_name.to_owned() + "_libfuzzer")
+                .arg(corpora_dir()?.join(target_name))
                 .arg("--")
                 .arg("-rss_limit_mb=0")
-                .arg(corpora_dir()?.join(target_name))
                 .current_dir("fuzzers/".to_owned() + client_name)
                 .spawn()
                 .context("cargo command failed to start".to_string())?
