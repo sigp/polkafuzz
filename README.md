@@ -22,7 +22,7 @@ _**A note on terminology:** "client" and "implementation" are used interchangeab
 
 The following diagram describes the current architecture of polkafuzz:
 
-<img src="./architecture.jpg">
+<img src="./architecture.svg">
 
 # ```polkafuzz_v2``` - Coverage Guided Fuzzer
 
@@ -45,4 +45,3 @@ Please refer to each tool's ```README``` for detailed instructions:
 - `polkafuzz_v1` [README](./polkafuzz_v1/README.md)
 - `polkafuzz_v2` [README](./polkafuzz_v2/README.md)
 - `reproducer` [README](./reproducer/README.md)
-
