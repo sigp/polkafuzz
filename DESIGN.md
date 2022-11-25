@@ -48,7 +48,7 @@ In recent benchmarks published by Google via their project FuzzBench, Honggfuzz 
 
 Differential fuzzing is the process of fuzz testing multiple implementations of the same specification and detecting any deviation/differences between the outputs produced by each of these implementations.
 
-This capability is incorporated into the [`polkafuzz_v2`](./polkafuzz_v2/README.md) tool and leverages Foreign Function Interfaces (FFI) bindings, allowing the support of different implementations made in different programming languages (e.g. Gossamer in Golang).
+This capability is incorporated into the [`polkafuzz_v1`](./polkafuzz_v1/README.md) tool and leverages Foreign Function Interfaces (FFI) bindings, allowing the support of different implementations made in different programming languages (e.g. Gossamer in Golang).
 
 
 ## Structural Fuzzing
