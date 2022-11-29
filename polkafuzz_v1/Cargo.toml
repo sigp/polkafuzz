@@ -6,6 +6,7 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+honggfuzz = "0.5.55"
 structopt = "0.3.26"
 clap = "2.34.0"
 failure = "0.1.8"
