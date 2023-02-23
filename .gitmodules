@@ -3,7 +3,7 @@
 	url = https://github.com/paritytech/substrate
 [submodule "clients/smoldot"]
 	path = clients/smoldot
-	url = https://github.com/paritytech/smoldot
+	url = git@github.com:smol-dot/smoldot.git
 [submodule "clients/gossamer"]
 	path = clients/gossamer
 	url = https://github.com/ChainSafe/gossamer
